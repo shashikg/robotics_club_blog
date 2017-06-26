@@ -152,48 +152,48 @@
   </tbody>
 </table>
 
-<p><strong>Install Arduino IDE using the following command</strong></p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo apt-get install java-common
-<span class="gp">$ </span>sudo apt-get install arduino
-</code></pre>
-</div>
-<p><strong>Install rosserial</strong></p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>sudo apt-get install ros-kinetic-rosserial ros-kinetic-rosserial-server ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python
-</code></pre>
-</div>
-<p>Please replace kinetic with the ROS distribution you are using.</p>
+<p><strong>Install Arduino IDE using the following command</strong>
+<code class="highlighter-rouge">sh
+$ sudo apt-get install java-common
+$ sudo apt-get install arduino
+</code>
+<strong>Install rosserial</strong>
+<code class="highlighter-rouge">sh
+$ sudo apt-get install ros-kinetic-rosserial ros-kinetic-rosserial-server ros-kinetic-rosserial-arduino ros-kinetic-rosserial-python
+</code>
+Please replace kinetic with the ROS distribution you are using.</p>
 
 <h3 id="verify-your-installation-for-ros">Verify your installation for ROS</h3>
-<p>In two seperate terminal window execute these two commands and verify whether a blue window opens up with a turtle in its center or not.</p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>roscore
-<span class="gp">$ </span>rosrun turtlesim turtlesim_node
-</code></pre>
-</div>
-<h2 id="setting-up-your-ros-workspace">Setting up your ROS Workspace</h2>
-<p>Run the following commands in series to setup your workspace.</p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>mkdir -p ~/catkin_ws/src
-<span class="gp">$ </span><span class="nb">cd</span> ~/catkin_ws/
-<span class="gp">$ </span>catkin_make
-</code></pre>
-</div>
-<p>Now run this command</p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>gedit ~/.bashrc
-</code></pre>
-</div>
-<p>and add this <strong>source ~/catkin_ws/devel/setup.bash</strong> at the end of the .bashrc file.</p>
+<p>In two seperate terminal window execute these two commands and verify whether a blue window opens up with a turtle in its center or not.
+<code class="highlighter-rouge">sh
+$ roscore
+$ rosrun turtlesim turtlesim_node
+</code>
+## Setting up your ROS Workspace
+Run the following commands in series to setup your workspace.
+<code class="highlighter-rouge">sh
+$ mkdir -p ~/catkin_ws/src
+$ cd ~/catkin_ws/
+$ catkin_make
+</code>
+Now run this command
+<code class="highlighter-rouge">sh
+$ gedit ~/.bashrc
+</code>
+and add this <strong>source ~/catkin_ws/devel/setup.bash</strong> at the end of the .bashrc file.</p>
 
 <h2 id="setting-up-your-arduino-ide">Setting up your Arduino IDE</h2>
 <p>First of all run the following commands one by one. Replace (sketchbook) with your exact location of Arduino IDE sketchbook.
-To know your sketchbook location open Arduino IDE goto File » Preference there you will get the location.</p>
-<div class="language-sh highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">cd</span> ~/catkin_ws/src
-<span class="gp">$ </span>git clone https://github.com/ros-drivers/rosserial.git
-<span class="gp">$ </span><span class="nb">cd</span> ~/catkin_ws/
-<span class="gp">$ </span>catkin_make
-<span class="gp">$ </span>rosrun rosserial_arduino make_libraries.py <span class="o">(</span>sketchbook<span class="o">)</span>/libraries
-</code></pre>
-</div>
-<h3 id="verify-for-arduino-ide-setup">Verify for Arduino IDE setup</h3>
-<p>Open Arduino IDE and check whether you can see <strong>ros_lib</strong> folder inside Examples.</p>
+To know your sketchbook location open Arduino IDE goto File » Preference there you will get the location.
+<code class="highlighter-rouge">sh
+$ cd ~/catkin_ws/src
+$ git clone https://github.com/ros-drivers/rosserial.git
+$ cd ~/catkin_ws/
+$ catkin_make
+$ rosrun rosserial_arduino make_libraries.py (sketchbook)/libraries
+</code>
+### Verify for Arduino IDE setup
+Open Arduino IDE and check whether you can see <strong>ros_lib</strong> folder inside Examples.</p>
 
 
         </div>
