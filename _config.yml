@@ -1,0 +1,5 @@
+name: Robotics Club Blog
+url: http://students.iitk.ac.in/roboclub
+baseurl: /blog
+paginate: 10
+paginate_path: "/blog/page:num/"
