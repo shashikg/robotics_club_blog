@@ -1,6 +1,12 @@
 name: Robotics Club Blog
 url: http://students.iitk.ac.in/roboclub/blog
-paginate: 2
+paginate: 5
 paginate_path: "/page:num/"
 gems: 
 - jekyll-paginate
+markdown: kramdown
+kramdown:
+ input: GFM
+ auto_ids: true
+ hard_wrap: false
+ syntax_highlighter: rouge
