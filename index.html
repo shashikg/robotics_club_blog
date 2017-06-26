@@ -16,11 +16,12 @@ layout: default
         <div class="mdl-card__supporting-text">
           {{ post.content }}
         </div>
-        <div class="mdl-layout-spacer"></div>
+        
         <div class="mdl-card__actions mdl-card--border">
           <a href="{{ post.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
             Read More
           </a>
+          <div class="mdl-layout-spacer"></div>
         </div>
       </div>
 
@@ -41,7 +42,9 @@ layout: default
 	        </button>
 	    </a>
 	  {% else %}
-	    <!-- <span class="previous">Previous</span> -->
+	    <button class="mdl-button mdl-js-button mdl-button--raised" disabled>
+			Prev
+		</button>
 	  {% endif %}
 	  <!-- <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span> -->
 	  <div class="mdl-layout-spacer"></div>
@@ -52,7 +55,9 @@ layout: default
 	        </button>
 	    </a>
 	  {% else %}
-	    <!-- <span class="next ">Next</span> -->
+	    <button class="mdl-button mdl-js-button mdl-button--raised" disabled>
+			Next
+		</button>
 	  {% endif %}
 
     </div>
