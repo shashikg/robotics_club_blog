@@ -1,5 +1,5 @@
 name: Robotics Club Blog
-url: https://github.com/shashikg/robotics_club_blog/master/docs
+url: https://raw.githubusercontent.com/shashikg/robotics_club_blog/master/docs
 paginate: 5
 paginate_path: "/page:num/"
 plugins: 
