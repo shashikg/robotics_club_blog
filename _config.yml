@@ -1,5 +1,5 @@
 name: Robotics Club Blog
-# url: http://students.iitk.ac.in/roboclub/blog
+url: https://github.com/shashikg/robotics_club_blog/tree/master/docs
 paginate: 5
 paginate_path: "/page:num/"
 plugins: 
