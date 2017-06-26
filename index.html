@@ -18,7 +18,7 @@ layout: default
         </div>
         
         <div class="mdl-card__actions mdl-card--border">
-          <a href="{{ post.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+          <a href="{{ site.url }}{{ post.url }}" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
             Read More
           </a>
           <div class="mdl-layout-spacer"></div>
@@ -36,7 +36,7 @@ layout: default
   <div class="post-grid mdl-grid">
     <div class="post-content paginator-btn post-grid mdl-cell mdl-cell--3-offset-desktop mdl-cell--2-offset-tablet mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
       {% if paginator.previous_page %}
-	    <a href="{{ paginator.previous_page_path }}" class="previous">
+	    <a href="{{ site.url }}{{ paginator.previous_page_path }}" class="previous">
 	    	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 	          Prev
 	        </button>
@@ -49,7 +49,7 @@ layout: default
 	  <!-- <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span> -->
 	  <div class="mdl-layout-spacer"></div>
 	  {% if paginator.next_page %}
-	    <a href="{{ paginator.next_page_path }}" class="next">
+	    <a href="{{ site.url }}{{ paginator.next_page_path }}" class="next">
 	    	<button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent">
 	          Next
 	        </button>
