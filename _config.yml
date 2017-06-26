@@ -1,5 +1,5 @@
 name: Robotics Club Blog
-url: http://students.iitk.ac.in/roboclub/blog
+# url: http://students.iitk.ac.in/roboclub/blog
 paginate: 5
 paginate_path: "/page:num/"
 gems: 
