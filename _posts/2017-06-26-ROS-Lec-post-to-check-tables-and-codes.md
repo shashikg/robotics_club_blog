@@ -1,6 +1,7 @@
 ---
 layout: post
 title: ROS Lec post to check for tables and codes.
+comments: true
 ---
 
 # ROS-Lecture
