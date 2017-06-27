@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="Robotics Club Website.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-    <title>-- --- .-. ... .  -.-. --- -.. .</title>
+    <title>Create ROS executables.</title>
 
     <!-- Page styles -->
     <link rel="shortcut icon" href=https://shashikg.github.io/robotics_club_blog/assets/images/favicon.ico type="image/x-icon">
@@ -99,28 +99,85 @@
     <div class="post-content post-grid mdl-cell mdl-cell--3-offset-desktop mdl-cell--2-offset-tablet mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
       <div class="post-card mdl-card">
         <div class="mdl-card__title  mdl-shadow--2dp">
-          <h1 class="mdl-card__title-text">-- --- .-. ... .  -.-. --- -.. .</h1>
+          <h1 class="mdl-card__title-text">Create ROS executables.</h1>
         </div>
         <div class="mdl-card__supporting-text">
-          <p>Its funny how we do not realize how much easier life has become due to technology. We are today in the age of 4G, theorizing 5G. It all came down from when wired and subsequently radio communication first kicked off. It has only been a little more than a century since Marconi came up with his radio in 1901 and here we are!</p>
-
-<p>My father is an amateur HAM radio enthusiast. I have grown up hearing all the jargon assosciated with radio communication. I thought its time that I really learn about them. I plan to come up with a series of posts about ‘Communication’. This is the kick starter - Morse Code!</p>
-
-<p>Morse Code made up for the earliest radio communication - even before it was possible to transmit voice. It is a series of dot(or dits) and dashes(or dahs) which when decoded, make perfect sense. The length of the code assosciated with each letter is inversely proportional to its frequency of use in the English Language. This was an effort to increase the speed with which Morse Code in transmitted - often measured in terms of wpm(words per minute).</p>
-
-<p>Morse Code was first used by its inventor-Morse over an electrical telegraph. It gradually evolved to being transmitted over radio waves. This was the first time ever that aviation and marine communication became a reality. We all know that Mayday was preceded by …- - -… .</p>
-
-<p>I would not talk about how morse code is transmitted over radio waves - that is for another post on Radio itself. Here I want to talk about the electrical telegraph. Wikipedia defines telegraphy as the long distance transmission of textual or symbolic messages without the physical exchange of an object bearing the message. Easy enough. Not much science goes behind working of a telegraph. The working of an electric telegraph is essentially synonymous with switching on and off of an electric circuit. The switch is fondly called the ‘morse key’. The circuit is as shown below</p>
-
-<p><img src="https://shashikg.github.io/robotics_club_blog/images/simple_telegraph_circuit.jpg" alt="The circuit of a telegraph" /></p>
-
-<p>On pressing the switch, the circuit completes and current flows. This is turn makes the electromagnet jump into action and it pulls the armature towards itself. The pen, which is attached to the armature now leaves an impression on the moving paper strip. The transmission is now complete! Here is what a ‘strip of transmitted message’ looks like. This is actually the first ever telegraphic message which reads: “What hath God wrought?” - sent by Morse himself.</p>
-
-<p><img src="https://shashikg.github.io/robotics_club_blog/images/first_telegraphic_message.gif" alt="First ever telegraph message!" /></p>
-
-<p>Today as morse code is slowly bidding us farewell, we still get it to hear about it sometimes. I bet the 90s kids know the famous …- -… which is more synonymous with the Nokia SMS tune than Morse code itself. Still, some radio enthusiasts are keeping it alive. Maybe, next you want to get creative with your letters or cards - use Morse Code!</p>
-
-<p><a href="https://www.loc.gov/item/mmorse000107">For a better look at the first ever telegraph message</a></p>
+          <h1 id="converting-a-c-executable-into-a-ros-supported">Converting a C++ executable into a ROS supported</h1>
+<h2 id="general-things-to-be-done">General things to be done</h2>
+<p>Every C++ node should contains the following lines.</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="c1">//required header files you need to add headers files which you need for your node
+</span><span class="cp">#include "ros/ros.h" //this header is compulsory.
+#include "std_msgs/Int32.h"
+</span>
+<span class="n">using</span> <span class="n">namespace</span> <span class="n">ros</span><span class="p">;</span>
+</code></pre>
+</div>
+<p>Just after the int main function add these two lines</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">init</span><span class="p">(</span><span class="n">argc</span><span class="p">,</span> <span class="n">argv</span><span class="p">,</span><span class="s">"demo_node"</span><span class="p">);</span> <span class="c1">// Initiallising node
+</span><span class="n">NodeHandle</span> <span class="n">nh</span><span class="p">;</span> <span class="c1">// declaring node handle.
+</span></code></pre>
+</div>
+<p>ROS have differen type of data types for its subscribe, publisher, service and client and all are initialised in its own way. Below are given for all of them.</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="c1">//For Publisher declarartion plus initialisation
+</span><span class="n">Publisher</span> <span class="n">pub_name</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">advertise</span><span class="o">&lt;</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">Int32</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"/topic"</span><span class="p">,</span><span class="mi">10</span><span class="p">);</span> 
+	<span class="c1">//Declaring publisher with name of publisher as pub_name and pub topic name as "/topic".
+</span>	<span class="c1">//and buffer size as 10. buffer size specifies the no of messages to keep before throwing away
+</span>	<span class="c1">//some to store new messages.
+</span>
+<span class="c1">//For Subscriber declarartion plus initialisation
+</span><span class="n">Subscriber</span> <span class="n">sub_name</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">subscribe</span><span class="p">(</span><span class="s">"/topic"</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">myfirst_callback</span><span class="p">);</span> <span class="c1">//Declaring subscriber with name as sub_name and sub topic name as "/topic".
+</span>
+<span class="c1">//For Client
+</span><span class="n">ServiceClient</span> <span class="n">client</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">serviceClient</span><span class="o">&lt;</span><span class="n">ros_lec</span><span class="o">::</span><span class="n">demo_srv</span><span class="o">&gt;</span><span class="p">(</span><span class="s">"service_name"</span><span class="p">);</span><span class="c1">//declaring serviceclient variable client for service name as "sq"
+</span>
+<span class="c1">//For Server
+</span><span class="n">ServiceServer</span> <span class="n">service</span> <span class="o">=</span> <span class="n">nh</span><span class="p">.</span><span class="n">advertiseService</span><span class="p">(</span><span class="s">"service_name"</span><span class="p">,</span> <span class="n">service_callback</span><span class="p">);</span> <span class="c1">//declaring serviceserver variable.
+</span></code></pre>
+</div>
+<p>Variable declaration in ROS for different message types</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="c1">//pkgname::msg_name var_name; e.g.
+</span><span class="n">std_msgs</span><span class="o">::</span><span class="n">Int32</span> <span class="n">pub_msg</span><span class="p">;</span>
+</code></pre>
+</div>
+<h2 id="specific-codes">Specific codes</h2>
+<h3 id="publisher">Publisher</h3>
+<p>You need to declare the message variable and store value in it and then use the following command to publish it.</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">pub_name</span><span class="p">.</span><span class="n">publish</span><span class="p">(</span><span class="n">pub_msg</span><span class="p">);</span> <span class="c1">//publishing the msg
+</span></code></pre>
+</div>
+<h3 id="subscriber">Subscriber</h3>
+<p>You need to create a callback function to be called when any message pops on the topicit subscribes to.</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="kt">void</span> <span class="nf">sub_callback</span><span class="p">(</span><span class="k">const</span> <span class="n">std_msgs</span><span class="o">::</span><span class="n">Int32</span><span class="o">&amp;</span> <span class="n">sub_msg</span><span class="p">)</span> <span class="c1">//Callback function nd storing the recieved msg in sub_msg...
+</span><span class="p">{</span>
+	<span class="c1">//do anything you want to do here.
+</span>	<span class="c1">//The message recieved can be accesse using the variable sub_msg
+</span>	<span class="c1">//in this case it is sub_msg.data
+</span><span class="p">}</span>
+</code></pre>
+</div>
+<h3 id="client">Client</h3>
+<p>You need to declare the service variable and store value in it and then use the following command to send request to the service</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">ros_lec</span><span class="o">::</span><span class="n">demo_srv</span> <span class="n">srv</span><span class="p">;</span> <span class="c1">//service variable
+// this is how value is stored in a servce variable srv.request.in
+// srv_var.request.data_name_used_in_while_making_srv_file
+// run this command to call service
+</span><span class="n">client</span><span class="p">.</span><span class="n">call</span><span class="p">(</span><span class="n">srv</span><span class="p">)</span>
+<span class="c1">//you will get your response in a varibale in srv_var.response.data_name_used_in_while_making_srv_file
+</span></code></pre>
+</div>
+<h3 id="service">Service</h3>
+<p>You need to create a callback function to be called when any service request is made.</p>
+<div class="language-c highlighter-rouge"><pre class="highlight"><code><span class="n">bool</span> <span class="nf">service_callback</span><span class="p">(</span><span class="n">ros_lec</span><span class="o">::</span><span class="n">demo_srv</span><span class="o">::</span><span class="n">Request</span> <span class="o">&amp;</span><span class="n">req</span><span class="p">,</span> <span class="n">ros_lec</span><span class="o">::</span><span class="n">demo_srv</span><span class="o">::</span><span class="n">Response</span> <span class="o">&amp;</span><span class="n">res</span><span class="p">)</span>
+<span class="p">{</span>
+	<span class="c1">//req.data_name_used_in_while_making_srv_file will contain your queried varialbe
+</span>	<span class="c1">//while res.data_name_used_in_while_making_srv_file is used to store the response data inside 
+</span>	<span class="c1">//this callback function.
+</span>	<span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre>
+</div>
+<h2 id="spin-and-spinonce">spin() and spinOnce()</h2>
+<p>You need to add any one of these two in order to check for callbacks.</p>
 
         </div>
         <div class="mdl-card__actions mdl-card--border">
@@ -129,7 +186,7 @@
           	</a>
           <div class="mdl-layout-spacer"></div>
           <button class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" disabled>
-          Written on: January  8, 2017
+          Written on: June 27, 2017
           </button>
         </div>
       </div>
@@ -138,6 +195,35 @@
   </div>
 </div>
 
+
+<div class="post-page post-section mdl-typography--text-justify">
+  <div class="post-grid mdl-grid">
+    <div class="post-content post-grid mdl-cell mdl-cell--3-offset-desktop mdl-cell--2-offset-tablet mdl-cell--6-col mdl-cell--4-col-tablet mdl-cell--4-col-phone">
+      <div class="comment-card post-card mdl-card">
+        <div id="disqus_thread"></div>
+		<script>
+
+		/**
+		*  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+		*  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+		/*
+		var disqus_config = function () {
+		this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+		this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+		};
+		*/
+		(function() { // DON'T EDIT BELOW THIS LINE
+		var d = document, s = d.createElement('script');
+		s.src = 'https://test-blog-comments.disqus.com/embed.js';
+		s.setAttribute('data-timestamp', +new Date());
+		(d.head || d.body).appendChild(s);
+		})();
+		</script>
+		<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      </div>
+    </div>
+  </div>
+</div>
 
         
         <!-- ################ footer ####################################################################### -->

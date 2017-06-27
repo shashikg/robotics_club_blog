@@ -1,4 +1,79 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://shashikg.github.io/robotics_club_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shashikg.github.io/robotics_club_blog/" rel="alternate" type="text/html" /><updated>2017-06-27T13:13:59+05:30</updated><id>https://shashikg.github.io/robotics_club_blog/</id><title type="html">Robotics Club Blog</title><entry><title type="html">ROS Lec post to check for tables and codes.</title><link href="https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes.html" rel="alternate" type="text/html" title="ROS Lec post to check for tables and codes." /><published>2017-06-26T00:00:00+05:30</published><updated>2017-06-26T00:00:00+05:30</updated><id>https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes</id><content type="html" xml:base="https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes.html">&lt;h1 id=&quot;ros-lecture&quot;&gt;ROS-Lecture&lt;/h1&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://shashikg.github.io/robotics_club_blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://shashikg.github.io/robotics_club_blog/" rel="alternate" type="text/html" /><updated>2017-06-27T14:17:48+05:30</updated><id>https://shashikg.github.io/robotics_club_blog/</id><title type="html">Robotics Club Blog</title><entry><title type="html">Create ROS executables.</title><link href="https://shashikg.github.io/robotics_club_blog/2017/06/27/Creating-ROS-suported-executables.html" rel="alternate" type="text/html" title="Create ROS executables." /><published>2017-06-27T00:00:00+05:30</published><updated>2017-06-27T00:00:00+05:30</updated><id>https://shashikg.github.io/robotics_club_blog/2017/06/27/Creating-ROS-suported-executables</id><content type="html" xml:base="https://shashikg.github.io/robotics_club_blog/2017/06/27/Creating-ROS-suported-executables.html">&lt;h1 id=&quot;converting-a-c-executable-into-a-ros-supported&quot;&gt;Converting a C++ executable into a ROS supported&lt;/h1&gt;
+&lt;h2 id=&quot;general-things-to-be-done&quot;&gt;General things to be done&lt;/h2&gt;
+&lt;p&gt;Every C++ node should contains the following lines.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//required header files you need to add headers files which you need for your node
+&lt;/span&gt;&lt;span class=&quot;cp&quot;&gt;#include &quot;ros/ros.h&quot; //this header is compulsory.
+#include &quot;std_msgs/Int32.h&quot;
+&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ros&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Just after the int main function add these two lines&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;argc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;argv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;demo_node&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Initiallising node
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NodeHandle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// declaring node handle.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;ROS have differen type of data types for its subscribe, publisher, service and client and all are initialised in its own way. Below are given for all of them.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//For Publisher declarartion plus initialisation
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Publisher&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pub_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertise&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/topic&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; 
+	&lt;span class=&quot;c1&quot;&gt;//Declaring publisher with name of publisher as pub_name and pub topic name as &quot;/topic&quot;.
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//and buffer size as 10. buffer size specifies the no of messages to keep before throwing away
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//some to store new messages.
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//For Subscriber declarartion plus initialisation
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Subscriber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sub_name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;subscribe&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/topic&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myfirst_callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Declaring subscriber with name as sub_name and sub topic name as &quot;/topic&quot;.
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//For Client
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceClient&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;client&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;serviceClient&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ros_lec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;demo_srv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;service_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//declaring serviceclient variable client for service name as &quot;sq&quot;
+&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//For Server
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ServiceServer&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nh&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;advertiseService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;service_name&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;service_callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//declaring serviceserver variable.
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;Variable declaration in ROS for different message types&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;//pkgname::msg_name var_name; e.g.
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int32&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;pub_msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;specific-codes&quot;&gt;Specific codes&lt;/h2&gt;
+&lt;h3 id=&quot;publisher&quot;&gt;Publisher&lt;/h3&gt;
+&lt;p&gt;You need to declare the message variable and store value in it and then use the following command to publish it.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;pub_name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;publish&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;pub_msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//publishing the msg
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;subscriber&quot;&gt;Subscriber&lt;/h3&gt;
+&lt;p&gt;You need to create a callback function to be called when any message pops on the topicit subscribes to.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;sub_callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;std_msgs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Int32&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sub_msg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//Callback function nd storing the recieved msg in sub_msg...
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//do anything you want to do here.
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//The message recieved can be accesse using the variable sub_msg
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//in this case it is sub_msg.data
+&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;client&quot;&gt;Client&lt;/h3&gt;
+&lt;p&gt;You need to declare the service variable and store value in it and then use the following command to send request to the service&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;ros_lec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;demo_srv&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;//service variable
+// this is how value is stored in a servce variable srv.request.in
+// srv_var.request.data_name_used_in_while_making_srv_file
+// run this command to call service
+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;client&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;call&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;srv&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//you will get your response in a varibale in srv_var.response.data_name_used_in_while_making_srv_file
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h3 id=&quot;service&quot;&gt;Service&lt;/h3&gt;
+&lt;p&gt;You need to create a callback function to be called when any service request is made.&lt;/p&gt;
+&lt;div class=&quot;language-c highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;bool&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;service_callback&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ros_lec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;demo_srv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Request&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;req&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ros_lec&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;demo_srv&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Response&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;res&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;//req.data_name_used_in_while_making_srv_file will contain your queried varialbe
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//while res.data_name_used_in_while_making_srv_file is used to store the response data inside 
+&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//this callback function.
+&lt;/span&gt;	&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;h2 id=&quot;spin-and-spinonce&quot;&gt;spin() and spinOnce()&lt;/h2&gt;
+&lt;p&gt;You need to add any one of these two in order to check for callbacks.&lt;/p&gt;</content><author><name></name></author><summary type="html">Converting a C++ executable into a ROS supported General things to be done Every C++ node should contains the following lines. ```c //required header files you need to add headers files which you need for your node #include “ros/ros.h” //this header is compulsory. #include “std_msgs/Int32.h”</summary></entry><entry><title type="html">ROS Lec post to check for tables and codes.</title><link href="https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes.html" rel="alternate" type="text/html" title="ROS Lec post to check for tables and codes." /><published>2017-06-26T00:00:00+05:30</published><updated>2017-06-26T00:00:00+05:30</updated><id>https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes</id><content type="html" xml:base="https://shashikg.github.io/robotics_club_blog/2017/06/26/ROS-Lec-post-to-check-tables-and-codes.html">&lt;h1 id=&quot;ros-lecture&quot;&gt;ROS-Lecture&lt;/h1&gt;
 &lt;p&gt;This repo contains all the codes and files which will be used during the lecture so it is suggested to clone this repo to your local PC. Further instructions are given below please follow them for a smooth conduct. You are also advised to download the lecture slides from  &lt;a href=&quot;https://docs.google.com/presentation/d/1lUvV41uaQqdtztrlgkrif68w_EaiigFQHx-20KBLS0M/edit?usp=sharing&quot;&gt;HERE&lt;/a&gt; and the cheatsheat provided in this repo, use that to know about command line tools.&lt;/p&gt;
 
 &lt;h2 id=&quot;preparations&quot;&gt;Preparations&lt;/h2&gt;
