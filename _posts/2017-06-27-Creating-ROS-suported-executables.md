@@ -4,8 +4,8 @@ title: Create ROS executables.
 comments: true
 ---
 
-# Converting a C++ executable into a ROS supported
-## General things to be done
+### Converting a C++ executable into a ROS supported
+#### General things to be done
 Every C++ node should contains the following lines.
 ```c
 //required header files you need to add headers files which you need for your node
